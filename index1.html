@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Management System</title>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+
+  <h1>Student Management System</h1>
+
+  <!-- FORM -->
+  <form id="studentForm">
+    <input type="text" id="name" placeholder="Enter Name" required>
+    <input type="number" id="age" placeholder="Enter Age" required>
+    <input type="text" id="course" placeholder="Enter Course" required>
+    <br>
+    <button type="submit">Add Student</button>
+  </form>
+
+  <!-- DISPLAY -->
+  <div id="studentList"></div>
+
+
+<script>
+
+  //  ARRAY
+  let students = [];
+
+  // ➤ ADD STUDENT
+  $("#studentForm").on("submit", function(e) {
+    e.preventDefault(); // reload stop
+
+    let name = $("#name").val();
+    let age = $("#age").val();
+    let course = $("#course").val();
+
+    //  OBJECT
+    let student = {
+      name: name,
+      age: age,
+      course: course
+    };
+
+    students.push(student);
+
+    displayStudents();
+
+    // form clear
+    $("#name").val("");
+    $("#age").val("");
+    $("#course").val("");
+  });
+
+
+  // ➤ DISPLAY FUNCTION
+  function displayStudents() {
+
+    $("#studentList").html("");
+
+    students.forEach(function(student, index) {
+
+      let studentHTML = `
+        <div class="student">
+          <h3>${student.name}</h3>
+          <p>Age: ${student.age}</p>
+          <p>Course: ${student.course}</p>
+          <button class="deleteBtn" onclick="deleteStudent(${index})">Delete</button>
+        </div>
+      `;
+
+      $("#studentList").append(studentHTML);
+    });
+  }
+
+
+  // ➤ DELETE FUNCTION
+  function deleteStudent(index) {
+    students.splice(index, 1);
+    displayStudents();
+  }
+
+</script>
+
+</body>
+</html>

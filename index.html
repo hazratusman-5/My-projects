@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="box">
+        <h2>Age Calculator</h2>
+
+        <input type="number" id="birthYear" placeholder="Enter Birth Year">
+
+        <br>
+        <button onclick="calculateAge()">Calculate Age</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            let birthYear = document.getElementById("birthYear").value;
+
+            let currentYear = new Date().getFullYear();
+
+            let age = currentYear - birthYear;
+
+            if (birthYear === "" || birthYear > currentYear) {
+                document.getElementById("result").innerText = "Please enter valid year";
+            } else {
+                document.getElementById("result").innerText = "Your Age is: " + age;
+            }
+        }
+    </script>
+
+</body>
+</html>
